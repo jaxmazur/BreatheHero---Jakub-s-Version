@@ -1,0 +1,365 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://images/badge.png" type="Texture" id=1]
+[ext_resource path="res://misc/Berlin Sans FB Regular.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://UI/game_theme.tres" type="Theme" id=4]
+
+[sub_resource type="GDScript" id=2]
+script/source = "# @author Xiaoyan Zhou
+extends Control
+onready var achievements : Node = get_tree().get_root().find_node(\"GridContainer\", true, false)
+
+var mainMenuScene = load(\"res://Game/Game.tscn\")
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	for i in range (0,achievements.get_child_count()):
+		achievements.get_child(i).visible = false
+	
+	pass # Replace with function body.
+
+func _process(delta):
+	_achievements_check()
+	pass
+	
+#check achievements
+func _achievements_check():
+	
+	if User.game_state[\"Achievements\"][\"all_collect\"]:
+		get_node(\"VBoxContainer/GridContainer/AllCollect\").visible = true
+	if User.game_state[\"Achievements\"][\"boss_fight\"]:
+		get_node(\"VBoxContainer/GridContainer/BossFight\").visible = true
+	if User.game_state[\"Achievements\"][\"woops\"]:
+		get_node(\"VBoxContainer/GridContainer/Woops\").visible = true
+	if User.game_state[\"Achievements\"][\"go_away\"]:
+		get_node(\"VBoxContainer/GridContainer/GoAway\").visible = true
+	if User.game_state[\"Achievements\"][\"more_level\"]:
+		get_node(\"VBoxContainer/GridContainer/MoreLevel\").visible = true			
+	if User.game_state[\"Achievements\"][\"breath\"]:
+		get_node(\"VBoxContainer/GridContainer/Breath\").visible = true
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+
+
+func _on_BackButton_pressed():
+	#get_tree().change_scene(\"res://Game/Game.tscn\")
+	get_tree().get_root().get_node(\"SceneChanger/Control\").change_scene(\"res://Game/Game.tscn\", \"fade\")
+	pass # Replace with function body.
+"
+
+[sub_resource type="DynamicFont" id=1]
+size = 75
+outline_size = 3
+outline_color = Color( 0.278431, 0.309804, 0.741176, 1 )
+font_data = ExtResource( 2 )
+
+[node name="Achievement" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = SubResource( 2 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.0038562
+anchor_top = 0.00344421
+anchor_right = 1.00386
+anchor_bottom = 1.02011
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+margin_right = 1280.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 0, 100 )
+
+[node name="Title" type="Label" parent="VBoxContainer/MarginContainer"]
+margin_left = 416.0
+margin_top = 8.0
+margin_right = 864.0
+margin_bottom = 92.0
+rect_min_size = Vector2( 0, 50 )
+size_flags_horizontal = 4
+custom_fonts/font = SubResource( 1 )
+text = "Achievements!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer"]
+margin_top = 104.0
+margin_right = 1280.0
+margin_bottom = 412.0
+columns = 2
+
+[node name="AllCollect" type="GridContainer" parent="VBoxContainer/GridContainer"]
+margin_right = 444.0
+margin_bottom = 100.0
+columns = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/GridContainer/AllCollect"]
+margin_right = 100.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 100, 100 )
+texture = ExtResource( 1 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="VBoxContainer/GridContainer/AllCollect/TextureRect"]
+margin_left = 102.0
+margin_right = 473.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 0, 50 )
+rect_scale = Vector2( 0.5, 0.5 )
+size_flags_horizontal = 4
+custom_fonts/font = SubResource( 1 )
+text = "ALL Collect!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/GridContainer/AllCollect"]
+margin_left = 104.0
+margin_right = 444.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 340, 100 )
+rect_pivot_offset = Vector2( -327.593, 77.1576 )
+text = "
+
+
+The first time you get all the coins in a level! Congratulations!!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Woops" type="GridContainer" parent="VBoxContainer/GridContainer"]
+margin_left = 448.0
+margin_right = 892.0
+margin_bottom = 100.0
+columns = 2
+
+[node name="TextureRect2" type="TextureRect" parent="VBoxContainer/GridContainer/Woops"]
+margin_right = 100.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 100, 100 )
+texture = ExtResource( 1 )
+expand = true
+
+[node name="Title" type="Label" parent="VBoxContainer/GridContainer/Woops/TextureRect2"]
+margin_left = 100.0
+margin_top = 6.0
+margin_right = 324.0
+margin_bottom = 94.0
+rect_min_size = Vector2( 0, 50 )
+rect_scale = Vector2( 0.5, 0.5 )
+size_flags_horizontal = 4
+custom_fonts/font = SubResource( 1 )
+text = "Woops!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="VBoxContainer/GridContainer/Woops"]
+margin_left = 104.0
+margin_right = 444.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 340, 100 )
+rect_pivot_offset = Vector2( -327.593, 77.1576 )
+text = "
+
+
+The first time you caught by a slime. No worries! I can keep fighting!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GoAway" type="GridContainer" parent="VBoxContainer/GridContainer"]
+margin_top = 104.0
+margin_right = 444.0
+margin_bottom = 204.0
+columns = 2
+
+[node name="TextureRect3" type="TextureRect" parent="VBoxContainer/GridContainer/GoAway"]
+margin_right = 100.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 100, 100 )
+texture = ExtResource( 1 )
+expand = true
+
+[node name="Title" type="Label" parent="VBoxContainer/GridContainer/GoAway/TextureRect3"]
+margin_left = 105.0
+margin_right = 713.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 0, 100 )
+rect_scale = Vector2( 0.5, 0.5 )
+size_flags_horizontal = 4
+custom_fonts/font = SubResource( 1 )
+text = "Sputum! Go Away!!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="VBoxContainer/GridContainer/GoAway"]
+margin_left = 104.0
+margin_right = 444.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 340, 100 )
+rect_pivot_offset = Vector2( -327.593, 77.1576 )
+text = "
+
+
+Remember you first birthday, you first time go to school and your first time to cough to break the treasure box! They are all woth to remember.
+
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MoreLevel" type="GridContainer" parent="VBoxContainer/GridContainer"]
+margin_left = 448.0
+margin_top = 104.0
+margin_right = 892.0
+margin_bottom = 204.0
+columns = 2
+
+[node name="TextureRect4" type="TextureRect" parent="VBoxContainer/GridContainer/MoreLevel"]
+margin_right = 100.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 100, 100 )
+texture = ExtResource( 1 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="VBoxContainer/GridContainer/MoreLevel/TextureRect4"]
+margin_left = 93.0
+margin_right = 680.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 0, 100 )
+rect_scale = Vector2( 0.5, 0.5 )
+size_flags_horizontal = 4
+custom_fonts/font = SubResource( 1 )
+text = "Good! More Levels!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel4" type="RichTextLabel" parent="VBoxContainer/GridContainer/MoreLevel"]
+margin_left = 104.0
+margin_right = 444.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 340, 100 )
+rect_pivot_offset = Vector2( -327.593, 77.1576 )
+text = "
+
+
+Hey young hero! You have just finished your first level you know!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BossFight" type="GridContainer" parent="VBoxContainer/GridContainer"]
+margin_top = 208.0
+margin_right = 444.0
+margin_bottom = 308.0
+columns = 2
+
+[node name="TextureRect5" type="TextureRect" parent="VBoxContainer/GridContainer/BossFight"]
+margin_right = 100.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 100, 100 )
+texture = ExtResource( 1 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="VBoxContainer/GridContainer/BossFight/TextureRect5"]
+margin_left = 102.0
+margin_right = 768.0
+margin_bottom = 171.0
+rect_min_size = Vector2( 0, 100 )
+rect_scale = Vector2( 0.5, 0.5 )
+size_flags_horizontal = 4
+custom_fonts/font = SubResource( 1 )
+text = "No One Can Stronger
+ Than Me!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel5" type="RichTextLabel" parent="VBoxContainer/GridContainer/BossFight"]
+margin_left = 104.0
+margin_right = 444.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 340, 100 )
+rect_pivot_offset = Vector2( -327.593, 77.1576 )
+text = "
+
+
+
+
+
+Win your first boss fight! You know you have just done a really great thing breave hero!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Breath" type="GridContainer" parent="VBoxContainer/GridContainer"]
+margin_left = 448.0
+margin_top = 208.0
+margin_right = 892.0
+margin_bottom = 308.0
+columns = 2
+
+[node name="TextureRect6" type="TextureRect" parent="VBoxContainer/GridContainer/Breath"]
+margin_right = 100.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 100, 100 )
+texture = ExtResource( 1 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="VBoxContainer/GridContainer/Breath/TextureRect6"]
+margin_left = 103.0
+margin_right = 368.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 0, 100 )
+rect_scale = Vector2( 0.5, 0.5 )
+size_flags_horizontal = 4
+custom_fonts/font = SubResource( 1 )
+text = "Breath!!!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel6" type="RichTextLabel" parent="VBoxContainer/GridContainer/Breath"]
+margin_left = 104.0
+margin_right = 444.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 340, 100 )
+rect_pivot_offset = Vector2( -327.593, 77.1576 )
+text = "
+
+
+The first time you breath the fire! Remember the feelings and do it again!!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackButton" type="Button" parent="VBoxContainer"]
+margin_left = 550.0
+margin_top = 416.0
+margin_right = 730.0
+margin_bottom = 464.0
+rect_min_size = Vector2( 180, 30 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource( 4 )
+text = "Back"
+
+[connection signal="pressed" from="VBoxContainer/BackButton" to="." method="_on_BackButton_pressed"]

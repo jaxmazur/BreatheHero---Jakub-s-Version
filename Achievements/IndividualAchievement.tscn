@@ -1,0 +1,260 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://misc/Berlin Sans FB Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://images/badge.png" type="Texture" id=2]
+[ext_resource path="res://images/smallCircle.png" type="Texture" id=3]
+[ext_resource path="res://Achievements/IndividualAchievement.gd" type="Script" id=4]
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.129412, 0.133333, 0.203922, 1 )
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.164706, 0.168627, 0.262745, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.262745, 0.270588, 0.419608, 1 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="DynamicFont" id=1]
+size = 35
+outline_size = 3
+outline_color = Color( 0.278431, 0.309804, 0.741176, 1 )
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 20
+outline_color = Color( 0.278431, 0.309804, 0.741176, 1 )
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.278431, 0.309804, 0.741176, 1 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.0901961, 0.0941176, 0.14902, 1 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0.105882, 0.109804, 0.172549, 1 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="DynamicFont" id=8]
+size = 25
+outline_size = 3
+outline_color = Color( 0.278431, 0.309804, 0.741176, 1 )
+use_filter = true
+font_data = ExtResource( 1 )
+
+[node name="IndividualAchievement" type="PanelContainer"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 469.0
+margin_bottom = 215.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 3 )
+script = ExtResource( 4 )
+achievementName = "Sample Title"
+achievementDescription = "Sample Description."
+percentCompleted = 35.64
+title = NodePath("MarginContainer2/IndividualAchievement/MarginContainer/MarginContainer/VBoxContainer/Title")
+desc = NodePath("MarginContainer2/IndividualAchievement/MarginContainer/MarginContainer/VBoxContainer/Description")
+completeBadge = NodePath("MarginContainer2/IndividualAchievement/AspectRatioContainer/Complete")
+completeText = NodePath("MarginContainer2/IndividualAchievement/MarginContainer/MarginContainer/VBoxContainer/MarginContainer/Complete")
+progressBar = NodePath("MarginContainer2/IndividualAchievement/MarginContainer/MarginContainer/VBoxContainer/MarginContainer/MarginContainer/ProgressBar")
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+margin_right = 464.0
+margin_bottom = 220.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 5
+custom_constants/margin_top = 5
+custom_constants/margin_left = 5
+custom_constants/margin_bottom = 5
+
+[node name="IndividualAchievement" type="HBoxContainer" parent="MarginContainer2"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 459.0
+margin_bottom = 215.0
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="MarginContainer2/IndividualAchievement"]
+margin_right = 115.0
+margin_bottom = 210.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.4
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer2/IndividualAchievement/AspectRatioContainer"]
+modulate = Color( 0.164706, 0.168627, 0.262745, 1 )
+margin_top = 47.5
+margin_right = 115.0
+margin_bottom = 162.5
+custom_constants/margin_right = 25
+custom_constants/margin_top = 25
+custom_constants/margin_left = 25
+custom_constants/margin_bottom = 25
+
+[node name="NotComplete" type="TextureRect" parent="MarginContainer2/IndividualAchievement/AspectRatioContainer/MarginContainer"]
+margin_left = 25.0
+margin_top = 25.0
+margin_right = 90.0
+margin_bottom = 90.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Complete" type="TextureRect" parent="MarginContainer2/IndividualAchievement/AspectRatioContainer"]
+visible = false
+margin_top = 47.5
+margin_right = 115.0
+margin_bottom = 162.5
+rect_min_size = Vector2( 100, 100 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 2 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer2/IndividualAchievement"]
+margin_left = 119.0
+margin_right = 454.0
+margin_bottom = 210.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 5
+custom_constants/margin_top = 5
+custom_constants/margin_bottom = 5
+
+[node name="Panel" type="Panel" parent="MarginContainer2/IndividualAchievement/MarginContainer"]
+margin_top = 5.0
+margin_right = 330.0
+margin_bottom = 205.0
+custom_styles/panel = SubResource( 4 )
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer2/IndividualAchievement/MarginContainer"]
+margin_top = 5.0
+margin_right = 330.0
+margin_bottom = 205.0
+custom_constants/margin_right = 15
+custom_constants/margin_top = 15
+custom_constants/margin_left = 15
+custom_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer2/IndividualAchievement/MarginContainer/MarginContainer"]
+margin_left = 15.0
+margin_top = 15.0
+margin_right = 315.0
+margin_bottom = 185.0
+rect_min_size = Vector2( 300, 0 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.3
+custom_constants/separation = 5
+
+[node name="Title" type="Label" parent="MarginContainer2/IndividualAchievement/MarginContainer/MarginContainer/VBoxContainer"]
+margin_right = 300.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 30 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 1 )
+text = "ALL Collect!"
+align = 1
+valign = 2
+autowrap = true
+
+[node name="Description" type="Label" parent="MarginContainer2/IndividualAchievement/MarginContainer/MarginContainer/VBoxContainer"]
+margin_top = 45.0
+margin_right = 300.0
+margin_bottom = 95.0
+rect_min_size = Vector2( 0, 50 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 2 )
+text = "The first time you get all the coins in a level! Congratulations!!"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer2/IndividualAchievement/MarginContainer/MarginContainer/VBoxContainer"]
+margin_top = 100.0
+margin_right = 300.0
+margin_bottom = 170.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 15
+custom_constants/margin_top = 15
+custom_constants/margin_left = 15
+custom_constants/margin_bottom = 15
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer2/IndividualAchievement/MarginContainer/MarginContainer/VBoxContainer/MarginContainer"]
+margin_left = 15.0
+margin_top = 15.0
+margin_right = 285.0
+margin_bottom = 55.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 5
+custom_constants/margin_top = 5
+custom_constants/margin_left = 5
+custom_constants/margin_bottom = 5
+
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer2/IndividualAchievement/MarginContainer/MarginContainer/VBoxContainer/MarginContainer/MarginContainer"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 265.0
+margin_bottom = 35.0
+rect_min_size = Vector2( 0, 30 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/fg = SubResource( 5 )
+custom_styles/bg = SubResource( 6 )
+
+[node name="Complete" type="Panel" parent="MarginContainer2/IndividualAchievement/MarginContainer/MarginContainer/VBoxContainer/MarginContainer"]
+margin_left = 15.0
+margin_top = 15.0
+margin_right = 285.0
+margin_bottom = 55.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 7 )
+
+[node name="Title" type="Label" parent="MarginContainer2/IndividualAchievement/MarginContainer/MarginContainer/VBoxContainer/MarginContainer/Complete"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 0, 30 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 8 )
+text = "COMPLETED"
+align = 1
+valign = 1
+autowrap = true
